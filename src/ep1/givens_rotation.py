@@ -23,6 +23,7 @@ def givens_rotations(A):
         print("matriz R:", R,"\n")
         print("matriz Q:", Qk(i,R),"\n")
         R = Qk(i,R)@R
+        R = np.matrix.round(R,5)
     return R
     pass
 
