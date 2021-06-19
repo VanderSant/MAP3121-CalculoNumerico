@@ -4,7 +4,7 @@
     "editor.insertSpaces": true,
 
     "files.trimFinalNewlines": true,
-    "files.trimTrailingWhitespace": true,
+    "files.trimTrailingWhitespace": false,
     "files.insertFinalNewline": true,
     "files.eol": "\n",
     "files.encoding": "utf8",
@@ -13,4 +13,5 @@
         "files.trimTrailingWhitespace": false,
         "files.trimFinalNewlines": false,
     },
+    "python.pythonPath": "C:\\Users\\Vanderson\\AppData\\Local\\Programs\\Python\\Python39\\python.exe",
 }
