@@ -1,0 +1,131 @@
+{
+ "metadata": {
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.9.5"
+  },
+  "orig_nbformat": 4,
+  "kernelspec": {
+   "name": "python3",
+   "display_name": "Python 3.9.5 64-bit"
+  },
+  "interpreter": {
+   "hash": "7573f1826719c495f3ba25031edb16b094c0636b1d900b9c08b47dfe6633cab2"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 2,
+ "cells": [
+  {
+   "source": [
+    "# Exercício Programa 1 - MAP3121 - Métodos Numéricos e Aplicações\n",
+    "##  Autovalores e Autovetores de Matrizes \n",
+    "## Tridiagonais Simétricas - O Algoritmo QR"
+   ],
+   "cell_type": "markdown",
+   "metadata": {}
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# imports\n",
+    "import numpy as np\n",
+    "import matplotlib as plt"
+   ]
+  },
+  {
+   "source": [
+    "## Rotações de Givens e a fatoração QR de uma matriz tridiagonal"
+   ],
+   "cell_type": "markdown",
+   "metadata": {}
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "## Function to get the givens_rotation_Qk matrix for givens rotation\n",
+    "def givens_rotation_Qk(k,A):\n",
+    "    Q = np.eye(len(A))\n",
+    "    alfa_k = A[k,k]\n",
+    "    beta_k = A[k+1,k]\n",
+    "    ck = alfa_k/(np.sqrt((alfa_k**2)+(beta_k**2)))\n",
+    "    sk = -(beta_k)/(np.sqrt((alfa_k**2)+(beta_k**2)))\n",
+    "    Q[k,k] = ck\n",
+    "    Q[k,k+1] = -sk\n",
+    "    Q[k+1,k] = sk\n",
+    "    Q[k+1,k+1] = ck\n",
+    "    return Q\n",
+    "    pass\n",
+    "\n",
+    "## Function which returns a matrix after a givens rotation\n",
+    "def QR_fatoration(A):\n",
+    "    R = A\n",
+    "    matrix_i_size = len(A)\n",
+    "    Q =np.eye(matrix_i_size)\n",
+    "    Q_iteration_size = matrix_i_size - 1\n",
+    "    for i in range (0, Q_iteration_size,1):\n",
+    "        Q = Q@np.transpose(givens_rotation_Qk(i,R))\n",
+    "        R = givens_rotation_Qk(i,R)@R\n",
+    "        R = np.matrix.round(R,5)\n",
+    "    return [R,Q]\n",
+    "    pass"
+   ]
+  },
+  {
+   "source": [
+    "## O algoritmo QR"
+   ],
+   "cell_type": "markdown",
+   "metadata": {}
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "metadata": {},
+   "outputs": [
+    {
+     "output_type": "stream",
+     "name": "stdout",
+     "text": [
+      "[[ 2.23607  1.78885  0.44721  0.     ]\n [ 0.       1.67332  1.91237  0.59761]\n [ 0.       0.       1.46385  1.9518 ]\n [ 0.       0.      -0.       0.91287]]\n[[ 0.89442719 -0.35856851  0.19517966 -0.18257471]\n [ 0.4472136   0.71713702 -0.39035933  0.36514941]\n [ 0.          0.59761453  0.58553865 -0.5477238 ]\n [ 0.          0.          0.68313174  0.73029516]]\n"
+     ]
+    }
+   ],
+   "source": [
+    "def QR_algorithm(A):\n",
+    "    V = np.eye(len(A))\n",
+    "    R,Q = QR_fatoration(A)\n",
+    "    A = R@Q\n",
+    "    V = V@Q\n",
+    "\n",
+    "    pass\n",
+    "\n",
+    "A = np.array([[2,1,0,0],\n",
+    "              [1,2,1,0],\n",
+    "              [0,1,2,1],\n",
+    "              [0,0,1,2]])"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ]
+}
