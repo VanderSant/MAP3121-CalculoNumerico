@@ -3,10 +3,10 @@ from QR_fatoration import QR_fatoration
 
 
 def get_sgnd(d):
-    if (d >= 0):
-        return 1
-    elif (d < 0):
+    if (d < 0):
         return -1
+    elif (d >= 0):
+        return 1
     pass
 
 def wilkinson_heuristics(A,n):
@@ -27,21 +27,21 @@ def get_uk(A,n,k):
 def QR_algorithm(A, erro = 1/1000000):
     V = np.eye(len(A))
     I = np.eye(len(A))
-    #R,Q = QR_fatoration(A)
-    #A = R@Q
-    #V = V@Q
     k = 0
     for n in range(len(A),1,-1):
         beta = wilkinson_heuristics(A,n)[1]
-        print(beta)
         while(abs(beta)>erro):
             uk = get_uk(A,n,k)
-            #print(uk)
             R,Q = QR_fatoration(A - (uk*I))
             A = R@Q + uk*I
             V = V@Q
             k = k + 1
             beta = wilkinson_heuristics(A,n)[1]
+        A = np.matrix.round(A,6)
+        V = np.matrix.round(V,6)
+        print("n = ", n)
+        print("V = ", V)
+        print("A = ",A)
     lamb = A
     return [V,lamb]
     pass
@@ -50,6 +50,10 @@ A = np.array([[2,1,0,0],
               [1,2,1,0],
               [0,1,2,1],
               [0,0,1,2]])
-
-print(QR_algorithm(A)[0])
-#print(QR_algorithm(A)[1])
+V,lamb = QR_algorithm(A)
+#print("V = ", V)
+#print("lamb = ",lamb)
+new_A = V*lamb*np.transpose(V)
+print("\n\n\n\n\n\n\n")
+print(A)
+print(new_A)
