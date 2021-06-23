@@ -1,7 +1,6 @@
 # imports
 import numpy as np
 import matplotlib.pyplot as plt
-import matplotlib.dates as mdates
 
 from QR_fatoration import QR_fatoration
 from QR_algorithm import QR_algorithm
@@ -58,3 +57,4 @@ if __name__ == "__main__":
 
     plt.legend(loc='upper center', bbox_to_anchor=(0.5, 1.15), ncol=2, frameon=False)
     plt.show()
+    pass
