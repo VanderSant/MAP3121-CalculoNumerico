@@ -34,6 +34,7 @@ if __name__ == "__main__":
     n_list = np.array([])
     for i in range (2,6):
         n = 2**i
+        print("For n = ", n)
         n_list = np.append(n_list,n)
         A_matrix = make_tridiagonal_matrix(n,alfa,beta)
 
