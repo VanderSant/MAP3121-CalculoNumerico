@@ -31,6 +31,8 @@ if __name__ == "__main__":
 
     k_with_spectral_shift_list = np.array([])
     k_without_spectral_shift_list = np.array([])
+    print("Assignment A: Example of using the QR algorithm in a tridiagonal matrix")
+    print("For this assignment we used: \n 'n' as size of the matirx \n 'k' as number of iterations")
     n_list = np.array([])
     for i in range (2,6):
         n = 2**i
