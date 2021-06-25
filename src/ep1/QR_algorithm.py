@@ -13,6 +13,7 @@ def wilkinson_heuristics(A,n):
     pass
 
 def QR_algorithm(A, erro = 1/1000000, spectral_shift = True):
+    round_parameter = len(str(int(1/erro)))
     get_uk = lambda A,n,k,spectral_shift: wilkinson_heuristics(A,n)[0] if ((k > 0) and (spectral_shift == True)) else 0
     V = I = np.eye(len(A))
     k = 0
@@ -25,6 +26,8 @@ def QR_algorithm(A, erro = 1/1000000, spectral_shift = True):
             V = V@Q
             k = k + 1
             beta = wilkinson_heuristics(A,m)[1]
+        A = np.matrix.round(A,round_parameter - 1)
+
     lamb = A
     return [V,lamb,k]
     pass
@@ -38,11 +41,11 @@ if __name__ == "__main__":
                 [0,0,1,2]])
     print("test QR_algorithm with spectral_shift")
     V,lamb,k = QR_algorithm(A)
-    print("V = ", V)
-    print("lamb = ",lamb)
+    print("V = \n", V)
+    print("lamb = \n",lamb)
     print("k shift = ", k)
     new_A = V@lamb@np.transpose(V)
-    new_A = np.matrix.round(new_A,3)
+    new_A = np.matrix.round(new_A,6)
     print("\n")
     print("A = \n", A)
     print("V Λ V_transposto = \n", new_A)
@@ -51,11 +54,11 @@ if __name__ == "__main__":
 
     print("test QR_algorithm without spectral_shift")
     V,lamb,k = QR_algorithm(A,spectral_shift = False)
-    print("V = ", V)
-    print("lamb = ",lamb)
+    print("V = \n", V)
+    print("lamb = \n",lamb)
     print("k = ", k)
     new_A = V@lamb@np.transpose(V)
-    new_A = np.matrix.round(new_A,3)
+    new_A = np.matrix.round(new_A,6)
     print("\n")
     print("A = \n", A)
     print("V Λ V_transposto = \n", new_A)
