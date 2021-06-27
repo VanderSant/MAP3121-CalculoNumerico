@@ -23,38 +23,7 @@ def solve_edo(t,y0,lamb):
         y = np.append(y,y_t(t,i,y0,lamb))
     return y
 
-
-if __name__ == "__main__":
-    ## Determine as frequências e seus respectivos modos de vibração.
-
-    # Os auto-vetores representam os modos naturais de vibração
-    # Os auto-valores determinam as frequências de vibração
-
-    # Q é a matriz ortogonal cujas colunas são os auto-vetores de A
-    # lamb é a matriz diagonal composta pelos auto-valores de A
-
-    # Y -> frequência determinada por um auto-valor de A
-    # X -> posição da massa
-    erro = 1e-6
-    # dates
-    m = 2 # kg
-    n = 5 # numbers of mass
-    k = lambda i: 40 + 2*i # k mola
-    x_0_1 = np.array([[-2],[-3],[-1],[-3],[-1]])
-    x_0_2 = np.array([[1],[10],[-4],[3],[-2]])
-
-    A = make_A_matrix(n,k,m)
-    Q,lamb = QR_algorithm(A,erro = erro,spectral_shift = True)[0:2]
-    y_0_1 = np.transpose(Q)@x_0_1
-    y_0_2 = np.transpose(Q)@x_0_2
-
-    y = lambda t: solve_edo(t,y_0_1,lamb)
-    x = lambda t: Q@solve_edo(t,y_0_1,lamb)
-    print(y(0))
-    #print(x(0))
-
-
-    dt = 0.01
+def get_points_and_plot(dt,x,y):
     t_array = np.array([])
 
     y_array_0 = np.array([])
@@ -97,4 +66,40 @@ if __name__ == "__main__":
     plt.plot(t_array,x_array_3)
     plt.plot(t_array,x_array_4)
     plt.show()
+
+
+if __name__ == "__main__":
+    ## Determine as frequências e seus respectivos modos de vibração.
+
+    # Os auto-vetores representam os modos naturais de vibração
+    # Os auto-valores determinam as frequências de vibração
+
+    # Q é a matriz ortogonal cujas colunas são os auto-vetores de A
+    # lamb é a matriz diagonal composta pelos auto-valores de A
+
+    # Y -> frequência determinada por um auto-valor de A
+    # X -> posição da massa
+    erro = 1e-6
+    # dates
+    m = 2 # kg
+    n = 5 # numbers of mass
+    k = lambda i: 40 + 2*i # k mola
+    x_0_1 = np.array([[-2],[-3],[-1],[-3],[-1]])
+    x_0_2 = np.array([[1],[10],[-4],[3],[-2]])
+
+    A = make_A_matrix(n,k,m)
+    Q,lamb = QR_algorithm(A,erro = erro,spectral_shift = True)[0:2]
+    y_0_1 = np.transpose(Q)@x_0_1
+    y_0_2 = np.transpose(Q)@x_0_2
+
+    y_1 = lambda t: solve_edo(t,y_0_1,lamb)
+    x_1 = lambda t: Q@solve_edo(t,y_0_1,lamb)
+
+    y_2 = lambda t: solve_edo(t,y_0_2,lamb)
+    x_2 = lambda t: Q@solve_edo(t,y_0_2,lamb)
+
+    dt = 0.1
+
+    get_points_and_plot(dt,x_2,y_2)
+
     pass
