@@ -1,9 +1,11 @@
+#!/usr/bin/env python3
+#coding=utf-8
+
 # imports
 import numpy as np
 import matplotlib.pyplot as plt
 
-from QR_fatoration import QR_fatoration
-from QR_algorithm import QR_algorithm
+from qr_method.qr_algorithm import QR_algorithm
 
 def make_tridiagonal_matrix(n,alfa,beta):
     A = alfa*np.eye(n)
