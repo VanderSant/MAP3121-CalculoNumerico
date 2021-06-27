@@ -1,1 +1,1 @@
-from . import qr_algorithm
+from . import QR_algorithm

@@ -3,7 +3,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-from qr_method.qr_algorithm import QR_algorithm
+from QR_method.QR_algorithm import QR_algorithm
 
 def make_A_matrix(n,k,m):
     A = np.zeros((n,n))
@@ -15,7 +15,6 @@ def make_A_matrix(n,k,m):
     A[n-1,n-1] = k(n) + k(n+1)
     A = A/m
     return A
-    pass
 
 def solve_edo(t,y0,lamb):
     y_t = lambda t,i,y0,lamb,: y0[i]*np.cos(np.sqrt(lamb[i,i])*t)
@@ -105,4 +104,3 @@ def assignment_b():
 
 if __name__ == "__main__":
     assignment_b()
-    

@@ -5,7 +5,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-from qr_method.qr_algorithm import QR_algorithm
+from QR_method.QR_algorithm import QR_algorithm
 
 def make_tridiagonal_matrix(n,alfa,beta):
     A = alfa*np.eye(n)
@@ -13,7 +13,6 @@ def make_tridiagonal_matrix(n,alfa,beta):
         A[i,i+1] = beta
         A[i+1,i] = beta
     return A
-    pass
 
 def test_matrix_values(A,V,lamb):
     print("V = ", V)
@@ -23,7 +22,6 @@ def test_matrix_values(A,V,lamb):
     print("\n")
     print("A = \n", A)
     print("V Λ V_transposto = \n", new_A)
-    pass
 
 
 def assignment_a():
@@ -62,8 +60,6 @@ def assignment_a():
 
     plt.legend(loc='upper center', bbox_to_anchor=(0.5, 1.15), ncol=2, frameon=False)
     plt.show()
-    pass
 
 if __name__ == "__main__":
     assignment_a()
-    pass

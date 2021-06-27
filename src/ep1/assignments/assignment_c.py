@@ -3,7 +3,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-from qr_method.qr_algorithm import QR_algorithm
+from QR_method.QR_algorithm import QR_algorithm
 from assignments.assignment_b import make_A_matrix,get_points_and_plot,solve_edo
 
 def assignment_c():

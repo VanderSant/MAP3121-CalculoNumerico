@@ -15,7 +15,6 @@ def givens_rotation_Qk(k,A):
     Q[k+1,k] = sk
     Q[k+1,k+1] = ck
     return Q
-    pass
 
 ## Function which returns a matrix after a givens rotation
 def QR_fatoration(A):
@@ -27,7 +26,6 @@ def QR_fatoration(A):
         Q = Q@np.transpose(givens_rotation_Qk(i,R))
         R = givens_rotation_Qk(i,R)@R
     return [R,Q]
-    pass
 
 def wilkinson_heuristics(A,n):
     get_sgnd = lambda d: 1 if d >= 0 else -1
@@ -37,7 +35,6 @@ def wilkinson_heuristics(A,n):
     dk = (alfa_ant - alfa)/2
     uk = alfa + dk - get_sgnd(dk)*(np.sqrt((dk**2)+(beta**2)))
     return [uk,beta]
-    pass
 
 def QR_algorithm(A, erro = 1/1000000, spectral_shift = True):
     round_parameter = len(str(int(1/erro)))
@@ -57,7 +54,6 @@ def QR_algorithm(A, erro = 1/1000000, spectral_shift = True):
 
     lamb = A
     return [V,lamb,k]
-    pass
 
 def test_qr_fatoration():
     #exemple 1:
@@ -70,7 +66,6 @@ def test_qr_fatoration():
     Q = QR_fatoration(A)[1]
     print("R = ", R)
     print("Q = ", Q)
-    pass
 
 def test_qr_algorithm():
     #exemple 1:
@@ -101,7 +96,7 @@ def test_qr_algorithm():
     print("\n")
     print("A = \n", A)
     print("V Λ V_transposto = \n", new_A)
-    pass
+
 if __name__ == "__main__":
     try:
         while True:
@@ -117,4 +112,3 @@ if __name__ == "__main__":
 
     except KeyboardInterrupt:
         print("\nBetter luck next time")
-    pass
