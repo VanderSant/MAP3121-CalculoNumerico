@@ -26,7 +26,7 @@ def test_matrix_values(A,V,lamb):
     pass
 
 
-if __name__ == "__main__":
+def assignment_a():
     erro = 1e-6
     alfa = 2
     beta = -1
@@ -62,4 +62,8 @@ if __name__ == "__main__":
 
     plt.legend(loc='upper center', bbox_to_anchor=(0.5, 1.15), ncol=2, frameon=False)
     plt.show()
+    pass
+
+if __name__ == "__main__":
+    assignment_a()
     pass

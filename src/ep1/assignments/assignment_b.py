@@ -3,8 +3,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-from QR_fatoration import QR_fatoration
-from QR_algorithm import QR_algorithm
+from qr_method.qr_algorithm import QR_algorithm
 
 def make_A_matrix(n,k,m):
     A = np.zeros((n,n))
@@ -69,8 +68,7 @@ def get_points_and_plot(dt,x,y):
     plt.plot(t_array,x_array_4)
     plt.show()
 
-
-if __name__ == "__main__":
+def assignment_b():
     ## Determine as frequências e seus respectivos modos de vibração.
 
     # Os auto-vetores representam os modos naturais de vibração
@@ -104,4 +102,7 @@ if __name__ == "__main__":
 
     get_points_and_plot(dt,x_2,y_2)
 
-    pass
+
+if __name__ == "__main__":
+    assignment_b()
+    

@@ -3,11 +3,10 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-from QR_fatoration import QR_fatoration
-from QR_algorithm import QR_algorithm
-from assignment_b import make_A_matrix,get_points_and_plot,solve_edo
+from qr_method.qr_algorithm import QR_algorithm
+from assignments.assignment_b import make_A_matrix,get_points_and_plot,solve_edo
 
-if __name__ == "__main__":
+def assignment_c():
     erro = 1e-6
     # dates
     m = 2 # kg
@@ -31,4 +30,5 @@ if __name__ == "__main__":
 
     get_points_and_plot(dt,x_2,y_2)
 
-    pass
+if __name__ == "__main__":
+    assignment_c()

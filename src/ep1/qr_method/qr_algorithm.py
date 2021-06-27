@@ -113,7 +113,7 @@ if __name__ == "__main__":
                 test_qr_fatoration()
                 print("\n")
             else:
-                print(" your input isn't valid \nplease, try again\n")
+                print("your input isn't valid \nplease, try again\n")
 
     except KeyboardInterrupt:
         print("\nBetter luck next time")
