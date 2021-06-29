@@ -2,6 +2,7 @@
 
 import numpy as np
 import matplotlib.pyplot as plt
+from numpy.core.fromnumeric import shape
 
 from QR_method.QR_algorithm import QR_algorithm
 
@@ -18,66 +19,39 @@ def make_A_matrix(n,k,m):
 
 def solve_edo(t,y0,lamb):
     y_t = lambda t,i,y0,lamb,: y0[i]*np.cos(np.sqrt(lamb[i,i])*t)
-    y = np.array([])
+    y = np.zeros(shape = [len(y0),1], dtype = float)
     for i in range(0,len(y0)):
-        y = np.append(y,y_t(t,i,y0,lamb))
+        y[i] = y_t(t,i,y0,lamb)
     return y
 
-def get_points_and_plot(dt,x,y):
+def plot_graphic(t_array,y_array,y_label = 'frequency',x_label = 'time',label = "x"):
+    quantity_graphics = len(y_array)
+    fig, axs = plt.subplots(quantity_graphics)
+    for i in range(0,quantity_graphics,1):
+        axs[i].plot(t_array,y_array[i],label='{la}{it}'.format(it = i,la = label))
+        axs[i].set_title('{la}{it}'.format(it = i,la = label))
+        axs[i].set_ylabel(y_label)
+        axs[i].set_xlabel(x_label)
+    plt.show()
+
+
+def get_points(dt,x,y,n):
     t_array = np.array([])
+    time = 60 #segundos
 
-    y_array_0 = np.array([])
-    y_array_1 = np.array([])
-    y_array_2 = np.array([])
-    y_array_3 = np.array([])
-    y_array_4 = np.array([])
+    y_array = np.zeros(shape = [n,1], dtype = float)
+    x_array = np.zeros(shape = [n,1], dtype = float)
 
-    x_array_0 = np.array([])
-    x_array_1 = np.array([])
-    x_array_2 = np.array([])
-    x_array_3 = np.array([])
-    x_array_4 = np.array([])
-
-    for t in np.arange(0,60,dt):
+    for t in np.arange(0,time,dt):
         t_array = np.append(t_array,t)
+        y_array = np.append(y_array,y(t),axis = 1)
+        x_array = np.append(x_array,x(t),axis = 1)
 
-        y_array_0 = np.append(y_array_0,y(t)[0])
-        y_array_1 = np.append(y_array_1,y(t)[1])
-        y_array_2 = np.append(y_array_2,y(t)[2])
-        y_array_3 = np.append(y_array_3,y(t)[3])
-        y_array_4 = np.append(y_array_4,y(t)[4])
+    y_array = np.delete(y_array,0,1)
+    x_array = np.delete(x_array,0,1)
 
-        x_array_0 = np.append(x_array_0,x(t)[0])
-        x_array_1 = np.append(x_array_1,x(t)[1])
-        x_array_2 = np.append(x_array_2,x(t)[2])
-        x_array_3 = np.append(x_array_3,x(t)[3])
-        x_array_4 = np.append(x_array_4,x(t)[4])
+    return [t_array,x_array,y_array]
 
-    fig, axs = plt.subplots(5)
-    axs[0].plot(t_array,y_array_0,label="y0")
-    axs[0].set_title("y0")
-    axs[1].plot(t_array,y_array_1,label="y1")
-    axs[1].set_title("y1")
-    axs[2].plot(t_array,y_array_2,label="y2")
-    axs[2].set_title("y2")
-    axs[3].plot(t_array,y_array_3,label="y3")
-    axs[3].set_title("y3")
-    axs[4].plot(t_array,y_array_4,label="y4")
-    axs[4].set_title("y4")
-    #axs.ylabel('time')
-    #axs.xlabel('frequency')
-    #plt.legend(loc='upper center', bbox_to_anchor=(0.5, 1.15), ncol=5, frameon=False)
-    plt.show()
-
-    plt.plot(t_array,x_array_0,label="x0")
-    plt.plot(t_array,x_array_1,label="x1")
-    plt.plot(t_array,x_array_2,label="x2")
-    plt.plot(t_array,x_array_3,label="x3")
-    plt.plot(t_array,x_array_4,label="x4")
-    plt.ylabel('time')
-    plt.xlabel('position')
-    plt.legend(loc='upper center', bbox_to_anchor=(0.5, 1.15), ncol=5, frameon=False)
-    plt.show()
 
 def assignment_b():
     ## Determine as frequências e seus respectivos modos de vibração.
@@ -110,9 +84,10 @@ def assignment_b():
     x_2 = lambda t: Q@solve_edo(t,y_0_2,lamb)
 
     dt = 0.1
+    t_array,x_array,y_array = get_points(dt,x_2,y_2,n)
 
-    get_points_and_plot(dt,x_2,y_2)
-
+    plot_graphic(t_array,y_array,label = "y")
+    plot_graphic(t_array,x_array,y_label = 'position', x_label = 'time',label = "x")
 
 if __name__ == "__main__":
     assignment_b()

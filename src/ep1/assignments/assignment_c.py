@@ -4,7 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 from QR_method.QR_algorithm import QR_algorithm
-from assignments.assignment_b import make_A_matrix,get_points_and_plot,solve_edo
+from assignments.assignment_b import make_A_matrix,get_points,solve_edo,plot_graphic
 
 def assignment_c():
     erro = 1e-6
@@ -27,8 +27,10 @@ def assignment_c():
     x_2 = lambda t: Q@solve_edo(t,y_0_2,lamb)
 
     dt = 0.1
+    t_array,x_array,y_array = get_points(dt,x_2,y_2,n)
 
-    get_points_and_plot(dt,x_2,y_2)
+    plot_graphic(t_array,y_array,label = "y")
+    plot_graphic(t_array,x_array,y_label = 'position', x_label = 'time',label = "x")
 
 if __name__ == "__main__":
     assignment_c()
