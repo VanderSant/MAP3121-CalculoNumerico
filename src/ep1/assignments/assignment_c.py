@@ -26,8 +26,8 @@ def assignment_c():
     y_2 = lambda t: solve_edo(t,y_0_2,lamb)
     x_2 = lambda t: Q@solve_edo(t,y_0_2,lamb)
 
-    dt = 0.1
-    t_array,x_array,y_array = get_points(dt,x_2,y_2,n)
+    dt = 0.01
+    t_array,x_array,y_array = get_points(dt,x_1,y_1)
 
     plot_graphic(t_array,y_array,label = "y")
     plot_graphic(t_array,x_array,y_label = 'position', x_label = 'time',label = "x")
