@@ -2,7 +2,6 @@
 
 import numpy as np
 import matplotlib.pyplot as plt
-from numpy.core.fromnumeric import shape
 
 from QR_method.QR_algorithm import QR_algorithm
 
@@ -55,16 +54,6 @@ def get_points(dt,x,y):
 
 
 def assignment_b():
-    ## Determine as frequências e seus respectivos modos de vibração.
-
-    # Os auto-vetores representam os modos naturais de vibração
-    # Os auto-valores determinam as frequências de vibração
-
-    # Q é a matriz ortogonal cujas colunas são os auto-vetores de A
-    # lamb é a matriz diagonal composta pelos auto-valores de A
-
-    # Y -> frequência determinada por um auto-valor de A
-    # X -> posição da massa
     erro = 1e-6
     # dates
     m = 2 # kg
