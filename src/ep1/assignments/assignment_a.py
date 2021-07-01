@@ -42,7 +42,7 @@ def assignment_a():
         V,lamb,k = QR_algorithm(A_matrix,erro = erro,spectral_shift = True)
         k_with_spectral_shift_list = np.append(k_with_spectral_shift_list,k)
         print("k with spectral shift = ", k)
-        test_matrix_values(A_matrix,V,lamb)
+        #test_matrix_values(A_matrix,V,lamb)
 
         V,lamb,k = QR_algorithm(A_matrix,erro = erro,spectral_shift = False)
         k_without_spectral_shift_list = np.append(k_without_spectral_shift_list,k)
