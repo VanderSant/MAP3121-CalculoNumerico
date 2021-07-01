@@ -110,4 +110,4 @@ if __name__ == "__main__":
                 print("your input isn't valid \nplease, try again\n")
 
     except KeyboardInterrupt:
-        print("\nBetter luck next time")
+        print("\n Better luck next time")
