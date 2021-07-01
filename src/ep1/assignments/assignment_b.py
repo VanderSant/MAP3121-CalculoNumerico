@@ -36,7 +36,7 @@ def plot_graphic(t_array,y_array,y_label = 'frequency',x_label = 'time',label = 
 
 def get_points(dt,x,y):
     t_array = np.array([])
-    time = 60 #segundos
+    time = 10 #segundos
 
     n = len(y(0))
     y_array = np.zeros(shape = [n,1], dtype = float)
