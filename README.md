@@ -1,4 +1,9 @@
-[![forthebadge](https://forthebadge.com/images/badges/built-with-resentment.svg)](https://forthebadge.com) [![forthebadge](https://forthebadge.com/images/badges/made-with-python.svg)](https://forthebadge.com) [![forthebadge](https://forthebadge.com/images/badges/works-on-my-machine.svg)](https://forthebadge.com)
+
+<p align="center">
+  <img src="https://forthebadge.com/images/badges/built-with-resentment.svg" width="250px" height="35px"/>
+  <img src="https://forthebadge.com/images/badges/made-with-python.svg"/>
+  <img src="https://forthebadge.com/images/badges/works-on-my-machine.svg" width="250px" height="35px"/>
+</p>
 
 # Métodos Numéricos e Aplicações
 
