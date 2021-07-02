@@ -101,7 +101,8 @@ def assignment_b():
     print("amostra 1")
     t_array,x_array,y_array = get_points(dt,x_1,y_1)
     print_frequency(lamb,n)
-    escolha = input("amostra 1: Deseja ver todos graficos juntos(1) ou sepado(2): ")
+    print("A massa com maior frequência é massa 1")
+    escolha = input("amostra 1: Deseja ver todos graficos juntos(1) ou separado(2): ")
     if(escolha == "1"):
         plot_graphics(t_array,x_array,y_label = 'x(t)', x_label = 'time',label = "x")
         print("\n")
@@ -111,7 +112,8 @@ def assignment_b():
     print("amostra 2")
     t_array,x_array,y_array = get_points(dt,x_2,y_2)
     print_frequency(lamb,n)
-    escolha = input("amostra 2: Deseja ver todos graficos juntos(1) ou sepado(2): ")
+    print("A massa com maior frequência é massa 1")
+    escolha = input("amostra 2: Deseja ver todos graficos juntos(1) ou separado(2): ")
     if(escolha == "1"):
         plot_graphics(t_array,x_array,y_label = 'x(t)', x_label = 'time',label = "x")
         print("\n")
