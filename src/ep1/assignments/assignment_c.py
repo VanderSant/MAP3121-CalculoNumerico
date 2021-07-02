@@ -4,7 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 from QR_method.QR_algorithm import QR_algorithm
-from assignments.assignment_b import make_A_matrix,get_points,solve_edo,plot_graphic
+from assignments.assignment_b import make_A_matrix,get_points,solve_edo,plot_graphics,print_frequency,print_separado
 
 def assignment_c():
     erro = 1e-6
@@ -27,10 +27,26 @@ def assignment_c():
     x_2 = lambda t: Q@solve_edo(t,y_0_2,lamb)
 
     dt = 0.01
-    t_array,x_array,y_array = get_points(dt,x_1,y_1)
 
-    plot_graphic(t_array,y_array,label = "y")
-    plot_graphic(t_array,x_array,y_label = 'position', x_label = 'time',label = "x")
+    print("amostra 1")
+    t_array,x_array,y_array = get_points(dt,x_1,y_1)
+    print_frequency(lamb,n)
+    escolha = input("amostra 1: Deseja ver todos graficos juntos(1) ou sepado(2): ")
+    if(escolha == "1"):
+        plot_graphics(t_array,x_array,y_label = 'x(t)', x_label = 'time',label = "x")
+        print("\n")
+    else:
+        print_separado(t_array,x_array)
+
+    print("amostra 2")
+    t_array,x_array,y_array = get_points(dt,x_2,y_2)
+    print_frequency(lamb,n)
+    escolha = input("amostra 2: Deseja ver todos graficos juntos(1) ou sepado(2): ")
+    if(escolha == "1"):
+        plot_graphics(t_array,x_array,y_label = 'x(t)', x_label = 'time',label = "x")
+        print("\n")
+    else:
+        print_separado(t_array,x_array)
 
 if __name__ == "__main__":
     assignment_c()
