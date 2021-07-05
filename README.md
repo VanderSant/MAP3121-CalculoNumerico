@@ -36,3 +36,9 @@ Ao interpretar o arquivo, será perguntado no terminal qual entre as tarefas se 
 
 Para sair da execução do arquivo aperte as teclas "Ctrl"+"c"
 
+## 💥 Execução do EP2
+
+
+### Coming Soon ...
+
+
