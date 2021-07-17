@@ -50,21 +50,19 @@ def householder_matrix_multiply(A):
     get_hwi_x = lambda w,x: (x - (2*(np.inner(w,x)/np.inner(w,w))*w))
     n = len(A)
     new_A = np.zeros((n,n))
-    #print(new_A)
-    #print(A)
-    for i in range(0,n-1):
+    for i in range(0,n-2):
         m = len(A)
         wi = get_wi(A)
         for j in range(0,m):
-            A[i+1:n,j] = get_hwi_x(wi,get_alfa(A,j))
+            A[1:m,j] = get_hwi_x(wi,get_alfa(A,j))
         for j in range(0,m):
-            A[j,i+1:n] = get_hwi_x(wi,get_alfa(np.transpose(A),j))
+            A[j,1:m] = get_hwi_x(wi,get_alfa(np.transpose(A),j))
         new_A[i:n,i:n] = A
         A = np.delete(A,0,0)
         A = np.delete(A,0,1)
-        print("new_A = ",new_A,"\n")
-        print("A = ",A,"\n")
-    pass
+    new_A[n-2:n,n-2:n] = A
+    print("new_A = ",np.matrix.round(new_A,4),"\n")
+    return new_A
 
 def householder_algorithm():
 
@@ -75,14 +73,6 @@ def main():
                   [-1.,1.,4.,2.],
                   [1.,4.,2.,-1.],
                   [3.,2.,-1.,1.]])
-    #print("teste get_A11 \n",get_A11(A),"\n")
-    #print("teste get_alfa \n",get_alfa(A),"\n")
-    #print("teste get_a \n",get_ai(A),"\n")
-    #print("teste get_A1 \n",get_A1(A),"\n")
-    #print("teste get_e \n",get_e(3),"\n")
-    #print("teste get_delta \n",get_delta(A),"\n")
-    #print("teste get_wi \n",get_wi(A),"\n")
-    #test_wi(A)
     householder_matrix_multiply(A)
 
 if __name__ == "__main__":
