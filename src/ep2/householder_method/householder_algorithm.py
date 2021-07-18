@@ -57,10 +57,10 @@ def test_wi(A):
     print(y)
 
 def test_householder_algorithm():
-    A = np.array([[2.,-1.,1.,3.],
-                  [-1.,1.,4.,2.],
-                  [1.,4.,2.,-1.],
-                  [3.,2.,-1.,1.]])
+    A = np.array([[2,-1,1,3],
+                  [-1,1,4,2],
+                  [1,4,2,-1],
+                  [3,2,-1,1]], dtype=float)
     householder_algorithm(A,debug=True)
 
 if __name__ == "__main__":
