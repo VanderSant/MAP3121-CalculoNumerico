@@ -2,8 +2,6 @@
 # coding=utf-8
 
 import numpy as np
-import math
-
 
 def get_e(n):
     e = np.zeros((1,n))
@@ -39,13 +37,11 @@ def norm(A):
     x=0
     for i in range (len(A)):
         x=x+(A[i]**2)
-    x = math.sqrt(x)
+    x = np.sqrt(x)
     return x
 
-
-
 def get_wi(A):
-    ai = np.array([])#np.zeros((1,1))
+    ai = np.array([])
     ai = np.append(ai,get_alfa(A,0))
     n = len(ai)
     wi = ai+(get_delta(A)*norm(ai)*get_e(n))
@@ -73,24 +69,19 @@ def householder_algorithm(A,debug = False):
         A = np.delete(A,0,1)
     new_A[n-2:n,n-2:n] = A
     if(debug==True):
-        print("new_A = ",np.matrix.round(new_A,4),"\n")
+        print("new_A = \n",np.matrix.round(new_A,4),"\n")
     return new_A
 
-def householder():
-
-    pass
-
-def main():
+def test_householder_algorithm():
     A = np.array([[2.,-1.,1.,3.],
                   [-1.,1.,4.,2.],
                   [1.,4.,2.,-1.],
                   [3.,2.,-1.,1.]])
     householder_algorithm(A,debug=True)
-    
 
 if __name__ == "__main__":
     try:
-        main()
+        test_householder_algorithm()
 
     except KeyboardInterrupt:
         print("\n Better luck next time")
