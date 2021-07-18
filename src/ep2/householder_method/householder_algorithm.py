@@ -46,7 +46,7 @@ def test_wi(A):
     y = alfa - (2*(np.inner(wi,alfa)/np.inner(wi,wi))*wi)
     print(y)
 
-def householder_matrix_multiply(A):
+def householder_algorithm(A,debug = False):
     get_hwi_x = lambda w,x: (x - (2*(np.inner(w,x)/np.inner(w,w))*w))
     n = len(A)
     new_A = np.zeros((n,n))
@@ -61,10 +61,11 @@ def householder_matrix_multiply(A):
         A = np.delete(A,0,0)
         A = np.delete(A,0,1)
     new_A[n-2:n,n-2:n] = A
-    print("new_A = ",np.matrix.round(new_A,4),"\n")
+    if(debug==True):
+        print("new_A = ",np.matrix.round(new_A,4),"\n")
     return new_A
 
-def householder_algorithm():
+def householder():
 
     pass
 
@@ -73,7 +74,7 @@ def main():
                   [-1.,1.,4.,2.],
                   [1.,4.,2.,-1.],
                   [3.,2.,-1.,1.]])
-    householder_matrix_multiply(A)
+    householder_algorithm(A,debug=True)
 
 if __name__ == "__main__":
     try:
