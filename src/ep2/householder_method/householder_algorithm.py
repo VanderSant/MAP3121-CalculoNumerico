@@ -8,27 +8,11 @@ def get_e(n):
     e[0,0] = 1
     return e
 
-def get_A11(A):
-    A11 = A[0,0]
-    return A11
-
 def get_alfa(A,j):
     alfa = np.array([])
     for i in range (1,len(A),1):
         alfa = np.append(alfa,A[i,j])
     return alfa
-
-def get_ai(A):
-    ai = np.array([])
-    ai = np.append(ai,0)
-    for i in range (1,len(A),1):
-        ai = np.append(ai,A[i,0])
-    return ai
-
-def get_A1(A):
-    len1 = len(A)
-    len2 = len(A[1])
-    return (A[1:len1,1:len2])
 
 def get_delta(A):
     return (A[1,0]/abs(A[1,0]))
@@ -46,12 +30,6 @@ def get_wi(A):
     n = len(ai)
     wi = ai+(get_delta(A)*norm(ai)*get_e(n))
     return wi
-
-def test_wi(A):
-    alfa = get_alfa(A)
-    wi = get_wi(A)
-    y = alfa - (2*(np.inner(wi,alfa)/np.inner(wi,wi))*wi)
-    print(y)
 
 def householder_algorithm(A,debug = False):
     get_hwi_x = lambda w,x: (x - (2*(np.inner(w,x)/np.inner(w,w))*w))
@@ -71,6 +49,12 @@ def householder_algorithm(A,debug = False):
     if(debug==True):
         print("new_A = \n",np.matrix.round(new_A,4),"\n")
     return new_A
+
+def test_wi(A):
+    alfa = get_alfa(A)
+    wi = get_wi(A)
+    y = alfa - (2*(np.inner(wi,alfa)/np.inner(wi,wi))*wi)
+    print(y)
 
 def test_householder_algorithm():
     A = np.array([[2.,-1.,1.,3.],
