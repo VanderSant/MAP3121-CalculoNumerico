@@ -14,7 +14,35 @@ EP_HEADER = '''
 
 INFO = '''
 TAREFAS:
-(a) Tarefa A: Matriz com diagonal e subdiagonal constantes
-(b) Tarefa B: Sistema Massa Mola com 5 massas
-(c) Tarefa C: Sistema Massa Mola com 10 massas
+(1) Tarefa 4.1: Calculo dos autovalores e autovetores das matrizes
+(2) Tarefa 4.2: Treliças Planas
 '''
+
+def print_assignment_header(letter):
+    print('''\n
+ ================================================================================================\n''',
+'=================================== assignment {type} ==============================================='.format(type = letter),'''
+ ================================================================================================\n''')
+
+def main():
+    print(EP_HEADER)
+    while True:
+        print(INFO,"\n")
+        assignment = input("Você quer ver qual tarefa?: ")
+        if ((assignment=="1") or (assignment=="4.1")):
+            print_assignment_header("1")
+            #function one here
+
+        elif ((assignment=="2") or (assignment=="4.2")):
+            print_assignment_header("2")
+            #function two here
+
+        else:
+            print("your input isn't valid \nplease, try again\n")
+
+if __name__ == "__main__":
+    try:
+        main()
+
+    except KeyboardInterrupt:
+        print("\nBetter luck next time")
