@@ -6,19 +6,22 @@ import numpy as np
 from householder_method.householder_algorithm import householder_algorithm
 from QR_method.QR_algorithm import QR_algorithm
 
-def assignment_1_a():
-    A = np.array([[2., 4., 1., 1.],
-                  [4., 2., 1., 1.],
-                  [1., 1., 1., 2.],
-                  [1., 1., 2., 1.]])
+INFO = '''
+TAREFA 4.1:
+(a) Tarefa 4.1.a: Calculo dos auto valores e autovetores da matriz:
+    [2., 4., 1., 1.]
+    [4., 2., 1., 1.]
+    [1., 1., 1., 2.]
+    [1., 1., 2., 1.]
 
-    A = householder_algorithm(A)
-    V,lamb = QR_algorithm(A)[0:2]
-    print("V =\n",V)
-    print("lamb =\n",np.diagonal(lamb))
-
-    pass
-
+(b) Tarefa 4.1.b: Calculo dos auto valores e autovetores da matriz:
+    [ n  n-1 n-2 ...  2   1 ]
+    [n-1 n-1 n-2 ...  2   1 ]
+    [n-2 n-2 n-2 ...  2   1 ]
+    [ :   :   :  ...  :   : ]
+    [ 2   2   2   2   2   1 ]
+    [ 1   1   1   1   1   1 ]
+'''
 def make_matrixB(n):
     B = np.zeros((n,n),dtype = float)
     for i in range (2,n+2,1):
@@ -34,19 +37,50 @@ def make_matrixB_alt(n):
         B[0:i,i] = n-i
         B[i,i] = n-i
     return B
+def get_eigenvalues(n):
+    lamb = np.array([])
+    eigenvaluesi = lambda i: ((1/2)*((1 - np.cos((2*i-1)*np.pi/(2*n+1)))**(-1)))
+    for i in range(1,n+1):
+        lamb = np.append(lamb,eigenvaluesi(i))
+    return lamb
+
+def assignment_1_a():
+    A = np.array([[2., 4., 1., 1.],
+                  [4., 2., 1., 1.],
+                  [1., 1., 1., 2.],
+                  [1., 1., 2., 1.]])
+
+    A = householder_algorithm(A)
+    V,lamb = QR_algorithm(A)[0:2]
+    print("V =\n",V)
+    print("lamb =\n",np.diagonal(lamb))
 
 def assignment_1_b():
     n = 20
     B = make_matrixB(n)
     B = householder_algorithm(B)
     V,lamb = QR_algorithm(B)[0:2]
-    print("V =\n",V)
-    print("lamb =\n",np.diagonal(lamb))
-    pass
+    eigenvalues = get_eigenvalues(n)
+
+    print("autovetores =\n",V)
+    print("autovalores obtidos =\n",np.diagonal(lamb))
+    print("autovalores esperados =\n",eigenvalues)
+
+def assignment_1():
+    print(INFO,"\n")
+    item = input("Gostaria de ver qual item? ")
+    if ((item == "a") or (item == "4.1.a")):
+        assignment_1_a()
+        print("\n")
+    elif ((item == "b") or (item == "4.1.b")):
+        assignment_1_b()
+        print("\n")
+    else:
+        print("your input isn't valid \nplease, try again\n")
 
 if __name__ == "__main__":
     try:
-        assignment_1_b()
+        assignment_1()
 
     except KeyboardInterrupt:
         print("\n Better luck next time")
