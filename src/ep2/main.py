@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 #coding=utf-8
 
+from assignments.assignment_1 import assignment_1_a,assignment_1_b
+
 EP_HEADER = '''
 ===============================================================================================
                             MAP3121 - Métodos Numéricos e Aplicações
@@ -31,7 +33,7 @@ def main():
         assignment = input("Você quer ver qual tarefa?: ")
         if ((assignment=="1") or (assignment=="4.1")):
             print_assignment_header("1")
-            #function one here
+            assignment_1_b()
 
         elif ((assignment=="2") or (assignment=="4.2")):
             print_assignment_header("2")
