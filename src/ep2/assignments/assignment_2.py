@@ -2,6 +2,7 @@
 # coding=utf-8
 
 import numpy as np
+import matplotlib.pyplot as plt
 
 A = 1/10 #m²
 E = 200*(10**(9)) #Pa
@@ -34,7 +35,7 @@ class Beam:
         C = np.cos(self.ang)
         S = np.sin(self.ang)
         matrix = np.array([ [C**2,C*S,-(C**2),-C*S],
-                            [C*S,S**2,-C*S,-S**2  ],
+                            [C*S,S**2,-C*S,-(S**2)  ],
                             [-(C**2),-C*S,C**2,C*S],
                             [-C*S,-(S**2),C*S,S**2]],dtype=float)
         self.K = x*matrix
@@ -95,7 +96,14 @@ def assignment_2():
         info = file_info[i]
         beams = np.append(beams,Beam(info[0],info[1],info[2],info[3]))
     K = make_total_k_matrix(beams)
-    print(K)
+
+    fig = plt.figure()
+    ax = fig.add_subplot(1,1,1)
+    ax.set_aspect('equal')
+    plt.imshow(K)
+    plt.colorbar()
+    plt.show()
+    #print(K)
 
 def test_class_beam():
     file_info = read_input_c()
