@@ -65,9 +65,8 @@ def read_input_c():
     return file_information
 
 def make_total_k_matrix(V):
-    n = 28
     m = len(V)
-    k_matrix = np.zeros((n,n),dtype=float)
+    k_matrix = np.zeros((m,m),dtype=float)
     for i in range (0,m):
         aux_k = V[i].get_K()
         i_pos = int(2*(V[i].no1) - 1)
@@ -88,28 +87,42 @@ def make_total_k_matrix(V):
         k_matrix[(j_pos),  (i_pos)]   += aux_k[3,1]
         k_matrix[(j_pos),  (j_pos-1)] += aux_k[3,2]
         k_matrix[(j_pos),  (j_pos)]   += aux_k[3,3]
-    for i in range(n-1,m-5,-1):
+    for i in range(m-1,m-5,-1):
         k_matrix = np.delete(k_matrix,i,0)
         k_matrix = np.delete(k_matrix,i,1)
     return k_matrix
 
-def test_make_total_k_matrix(K):
-    fig = plt.figure()
-    ax = fig.add_subplot(1,1,1)
-    ax.set_aspect('equal')
-    plt.imshow(K)
-    plt.colorbar()
-    plt.show()
+def make_M_matrix(V):
+    n = len(V)
+    m_matrix = np.zeros((n,n),dtype=float)
+    for i in range(0,n):
+        pos1 = int(2*(V[i].no1) - 1)
+        pos2 = int(2*(V[i].no2) - 1)
+        massa = V[i].get_mass()
+
+        m_matrix[pos1 - 1,pos1 - 1] += massa/2
+        m_matrix[pos1,pos1] += massa/2
+        m_matrix[pos2 - 1,pos2 - 1] += massa/2
+        m_matrix[pos2,pos2] += massa/2
+
+    for i in range(n-1,n-5,-1):
+        m_matrix = np.delete(m_matrix,i,0)
+        m_matrix = np.delete(m_matrix,i,1)
+    return m_matrix
 
 def assignment_2():
+    np.set_printoptions(precision=2,suppress=True,threshold=24)
     file_info = read_input_c()
-    print(file_info,"\n")
     beams = np.array([])
     for i in range(0,NUM_TRE):
         info = file_info[i]
         beams = np.append(beams,Beam(info[0],info[1],info[2],info[3]))
     K = make_total_k_matrix(beams)
-    test_make_total_k_matrix(K)
+    M = make_M_matrix(beams)
+    K_til = (np.linalg.inv(np.sqrt(M)))@K@(np.linalg.inv(np.sqrt(M)))
+    #print(K_til)
+    #print("K = \n",np.matrix.round(K,4),"\n")
+    #print("M = \n",np.matrix.round(M,4),"\n")
 
 def test_class_beam():
     file_info = read_input_c()
@@ -118,6 +131,14 @@ def test_class_beam():
         info = file_info[i]
         beams = np.append(beams,Beam(info[0],info[1],info[2],info[3]))
         print(beams[i]," massa =",beams[i].get_mass())
+
+def test_make_total_k_matrix(K):
+    fig = plt.figure()
+    ax = fig.add_subplot(1,1,1)
+    ax.set_aspect('equal')
+    plt.imshow(K)
+    plt.colorbar()
+    plt.show()
 
 if __name__ == "__main__":
     try:
