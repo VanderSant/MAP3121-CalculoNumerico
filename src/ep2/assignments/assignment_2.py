@@ -54,35 +54,29 @@ def read_input_c():
                 (file_information[i])[j] = float((file_information[i])[j])
     return file_information
 
-def test_class_beam():
-    file_info = read_input_c()
-    print(file_info,"\n")
-    beams = np.array([])
-    for i in range(0,NUM_TRE):
-        info = file_info[i]
-        beams = np.append(beams,Beam(info[0],info[1],info[2],info[3]))
-    print(beams[0],"\n",beams[0].get_K())
-
-def make_total_K_matrix(V):
-    K = np.zeros(24)
+def make_total_k_matrixatrix(V):
+    k_matrix = np.zeros((29,29),dtype=float)
     for i in range (0,len(V)):
         aux_k = V[i].get_K()
-        K[2*(V[i].no1)-1,2*(V[i].no1)-1] += aux_k[1,1]
-        K[2*(V[i].no1)-1,2*(V[i].no1)] += aux_k[1,2]
-        K[2*(V[i].no1)-1,2*(V[i].no2)-1] += aux_k[1,3]
-        K[2*(V[i].no1)-1,2*(V[i].no2)] += aux_k[1,4]
-        K[2*(V[i].no1),2*(V[i].no1)-1] += aux_k[2,1]
-        K[2*(V[i].no1),2*(V[i].no1)] += aux_k[2,2]
-        K[2*(V[i].no1),2*(V[i].no2)-1] += aux_k[2,3]
-        K[[2*(V[i].no1),2*(V[i].noj)]] += aux_k[2,4]
-        K[2*(V[i].no2)-1,2*(V[i].no1)-1] += aux_k[3,1]
-        K[2*(V[i].no2)-1,2*(V[i].no1)] += aux_k[3,2]
-        K[2*(V[i].no2)-1,2*(V[i].no2)-1] += aux_k[3,3]
-        K[2*(V[i].no2)-1,2*(V[i].no2)] += aux_k[3,4]
-        K[2*(V[i].no2),2*(V[i].no1)-1] += aux_k[4,1]
-        K[2*(V[i].no2),2*(V[i].no1)] += aux_k[4,2]
-        K[2*(V[i].no2),2*(V[i].no2)-1] += aux_k[4,3]
-        K[2*(V[i].no2),2*(V[i].no2)] += aux_k[4,4]
+        i_pos = int(2*(V[i].no1))
+        j_pos = int(2*(V[i].no2))
+        k_matrix[(i_pos-1),(i_pos-1)] += aux_k[0,0]
+        k_matrix[(i_pos-1),(i_pos)]   += aux_k[0,1]
+        k_matrix[(i_pos-1),(j_pos-1)] += aux_k[0,2]
+        k_matrix[(i_pos-1),(j_pos)]   += aux_k[0,3]
+        k_matrix[(i_pos),  (i_pos-1)] += aux_k[1,0]
+        k_matrix[(i_pos),  (i_pos)]   += aux_k[1,1]
+        k_matrix[(i_pos),  (j_pos-1)] += aux_k[1,2]
+        k_matrix[(i_pos),  (j_pos)]   += aux_k[1,3]
+        k_matrix[(j_pos-1),(i_pos-1)] += aux_k[2,0]
+        k_matrix[(j_pos-1),(i_pos)]   += aux_k[2,1]
+        k_matrix[(j_pos-1),(j_pos-1)] += aux_k[2,2]
+        k_matrix[(j_pos-1),(j_pos)]   += aux_k[2,3]
+        k_matrix[(j_pos),  (i_pos-1)] += aux_k[3,0]
+        k_matrix[(j_pos),  (i_pos)]   += aux_k[3,1]
+        k_matrix[(j_pos),  (j_pos-1)] += aux_k[3,2]
+        k_matrix[(j_pos),  (j_pos)]   += aux_k[3,3]
+    return k_matrix
 
 def assignment_2():
     file_info = read_input_c()
@@ -91,6 +85,16 @@ def assignment_2():
     for i in range(0,NUM_TRE):
         info = file_info[i]
         beams = np.append(beams,Beam(info[0],info[1],info[2],info[3]))
+    K = make_total_k_matrixatrix(beams)
+    print(K)
+
+def test_class_beam():
+    file_info = read_input_c()
+    beams = np.array([])
+    for i in range(0,NUM_TRE):
+        info = file_info[i]
+        beams = np.append(beams,Beam(info[0],info[1],info[2],info[3]))
+    print(beams[0],"\n",beams[0].get_K())
 
 if __name__ == "__main__":
     try:
