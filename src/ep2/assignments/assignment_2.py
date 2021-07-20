@@ -3,12 +3,11 @@
 
 import numpy as np
 
-P = 7.8*(10**(3)) #kg/m³
 A = 1/10 #m²
 E = 200*(10**(9)) #Pa
-L = 10 #m
-D = 20 #m
 NUM_TRE = 28
+DENSIDADE = 7.8*(10**(3)) #kg/m³
+
 
 PATH = "src/ep2/inputs/input-c"
 
@@ -20,9 +19,13 @@ class Beam:
         self.lenght = lenght
         self.A = A
         self.E = E
+        self.dens = DENSIDADE
 
+        self.massa = 0
         self.K = 0
+
         self.make_k_matrix()
+        self.find_mass()
 
     def __str__(self):
         return 'no1 ={no_1}, no2 ={no_2}, ang ={ang}, lenght ={lenght}\n'.format(no_1=self.no1,no_2=self.no2,ang=self.ang,lenght=self.lenght)
@@ -37,8 +40,15 @@ class Beam:
                             [-C*S,-(C**2),C*S,S**2]],dtype=float)
         self.K = x*matrix
 
+    def find_mass(self):
+        self.mass = self.A*self.lenght*self.dens
+        pass
+
     def get_K(self):
         return self.K
+
+    def get_mass(self):
+        return self.mass
 
 def read_input_c():
     file_information = open(PATH,"r").read()
@@ -94,7 +104,7 @@ def test_class_beam():
     for i in range(0,NUM_TRE):
         info = file_info[i]
         beams = np.append(beams,Beam(info[0],info[1],info[2],info[3]))
-    print(beams[0],"\n",beams[0].get_K())
+    print(beams[0],"\n","massa =",beams[0].get_mass(),"\n",beams[0].get_K())
 
 if __name__ == "__main__":
     try:
