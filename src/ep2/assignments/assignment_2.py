@@ -8,7 +8,6 @@ E = 200*(10**(9)) #Pa
 NUM_TRE = 28
 DENSIDADE = 7.8*(10**(3)) #kg/m³
 
-
 PATH = "src/ep2/inputs/input-c"
 
 class Beam:
@@ -64,7 +63,7 @@ def read_input_c():
                 (file_information[i])[j] = float((file_information[i])[j])
     return file_information
 
-def make_total_k_matrixatrix(V):
+def make_total_k_matrix(V):
     k_matrix = np.zeros((29,29),dtype=float)
     for i in range (0,len(V)):
         aux_k = V[i].get_K()
@@ -95,7 +94,7 @@ def assignment_2():
     for i in range(0,NUM_TRE):
         info = file_info[i]
         beams = np.append(beams,Beam(info[0],info[1],info[2],info[3]))
-    K = make_total_k_matrixatrix(beams)
+    K = make_total_k_matrix(beams)
     print(K)
 
 def test_class_beam():
