@@ -8,6 +8,7 @@ A = 1/10 #m²
 E = 200*(10**(9)) #Pa
 L = 10 #m
 D = 20 #m
+NUM_TRE = 28
 
 PATH = "src/ep2/inputs/input-c"
 
@@ -17,17 +18,16 @@ class Beam:
         self.no2 = no2
         self.ang = ang*np.pi/180
         self.lenght = lenght
-        self.area = A
+        self.A = A
         self.E = E
 
         self.K = 0
         self.make_k_matrix()
-        pass
 
     def make_k_matrix(self):
         x = (self.A*self.E)/self.lenght
         C = np.cos(self.ang)
-        S = np.sen(self.ang)
+        S = np.sin(self.ang)
         matrix = np.array([ [C**2,C*S,-(C**2),-C*S],
                             [C*S,S**2,-C*S,-S**2],
                             [-(C**2),-C*S,C**2,C*S],
@@ -36,7 +36,6 @@ class Beam:
 
     def get_K(self):
         return self.K
-
 
 def read_input_c():
     file_information = open(PATH,"r").read()
@@ -77,11 +76,15 @@ def make_total_K_matrix(V):
         K[2*(V[i].no2),2*(V[i].no1)] += aux_k[4,2]
         K[2*(V[i].no2),2*(V[i].no2)-1] += aux_k[4,3]
         K[2*(V[i].no2),2*(V[i].no2)] += aux_k[4,4]
-    pass
 
 def assignment_2():
-    print(read_input_c())
-    pass
+    file_info = read_input_c()
+    print(file_info)
+    beams = np.array([])
+    for i in range(0,NUM_TRE):
+        info = file_info[i]
+        beams = np.append(beams,Beam(info[0],info[1],info[2],info[3]))
+    print(beams[0].get_K())
 
 if __name__ == "__main__":
     try:
