@@ -34,9 +34,9 @@ class Beam:
         C = np.cos(self.ang)
         S = np.sin(self.ang)
         matrix = np.array([ [C**2,C*S,-(C**2),-C*S],
-                            [C*S,S**2,-C*S,-S**2],
+                            [C*S,S**2,-C*S,-S**2  ],
                             [-(C**2),-C*S,C**2,C*S],
-                            [-C*S,-(C**2),C*S,S**2]],dtype=float)
+                            [-C*S,-(S**2),C*S,S**2]],dtype=float)
         self.K = x*matrix
 
     def find_mass(self):
