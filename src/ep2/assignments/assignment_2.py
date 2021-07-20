@@ -44,14 +44,17 @@ def read_input_c():
     for i in range(0,2):
         file_information.pop(0) #pop main information
     matrix_len = len(file_information)
-    for i in range (0,matrix_len):
+    for i in range(0,matrix_len):
         file_information[i] = file_information[i].split(" ")
-    print(file_information)
-    pass
+        m = len(file_information[i])
+        for j in range(0,m):
+            if ((file_information[i])[j] != ""):
+                (file_information[i])[j] = float((file_information[i])[j])
+    return file_information
 
 def make_total_K_matrix(V):
     K = np.zeros(24)
-    for i in range len(V)
+    for i in range (0,len(V)):
         # Jeito completamente corno kkkkkkkk mas não encontrei nenhum padrão, da uma olhadinha no enunciado
         # Ta mais pra pseudocódigo pq n sei exatamente como acessa os valores haha
         # Vou comer aqui, aí ja volto
@@ -65,7 +68,7 @@ def make_total_K_matrix(V):
         K[2*(V[i].no1),2*(V[i].no1)-1] += aux_k[2,1]
         K[2*(V[i].no1),2*(V[i].no1)] += aux_k[2,2]
         K[2*(V[i].no1),2*(V[i].no2)-1] += aux_k[2,3]
-        K[[2*(V[i].no1),2*(V[i].noj)] += aux_k[2,4]
+        K[[2*(V[i].no1),2*(V[i].noj)]] += aux_k[2,4]
         K[2*(V[i].no2)-1,2*(V[i].no1)-1] += aux_k[3,1]
         K[2*(V[i].no2)-1,2*(V[i].no1)] += aux_k[3,2]
         K[2*(V[i].no2)-1,2*(V[i].no2)-1] += aux_k[3,3]
@@ -74,14 +77,10 @@ def make_total_K_matrix(V):
         K[2*(V[i].no2),2*(V[i].no1)] += aux_k[4,2]
         K[2*(V[i].no2),2*(V[i].no2)-1] += aux_k[4,3]
         K[2*(V[i].no2),2*(V[i].no2)] += aux_k[4,4]
-
-
-
-
     pass
 
 def assignment_2():
-    read_input_c()
+    print(read_input_c())
     pass
 
 if __name__ == "__main__":
