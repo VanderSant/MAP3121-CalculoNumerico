@@ -27,7 +27,7 @@ class Beam:
         self.find_mass()
 
     def __str__(self):
-        return 'no1 ={no_1}, no2 ={no_2}, ang ={ang}, lenght ={lenght}\n'.format(no_1=self.no1,no_2=self.no2,ang=self.ang,lenght=self.lenght)
+        return 'no1 ={no_1}, no2 ={no_2}, ang ={ang}, lenght ={lenght}'.format(no_1=self.no1,no_2=self.no2,ang=self.ang,lenght=self.lenght)
 
     def make_k_matrix(self):
         x = (self.A*self.E)/self.lenght
@@ -103,7 +103,7 @@ def test_class_beam():
     for i in range(0,NUM_TRE):
         info = file_info[i]
         beams = np.append(beams,Beam(info[0],info[1],info[2],info[3]))
-    print(beams[0],"\n","massa =",beams[0].get_mass(),"\n",beams[0].get_K())
+        print(beams[i]," massa =",beams[i].get_mass())
 
 if __name__ == "__main__":
     try:
