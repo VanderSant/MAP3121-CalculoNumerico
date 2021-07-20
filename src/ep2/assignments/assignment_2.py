@@ -64,11 +64,11 @@ def read_input_c():
     return file_information
 
 def make_total_k_matrix(V):
-    k_matrix = np.zeros((29,29),dtype=float)
+    k_matrix = np.zeros((28,28),dtype=float)
     for i in range (0,len(V)):
         aux_k = V[i].get_K()
-        i_pos = int(2*(V[i].no1))
-        j_pos = int(2*(V[i].no2))
+        i_pos = int(2*(V[i].no1) - 1)
+        j_pos = int(2*(V[i].no2) - 1)
         k_matrix[(i_pos-1),(i_pos-1)] += aux_k[0,0]
         k_matrix[(i_pos-1),(i_pos)]   += aux_k[0,1]
         k_matrix[(i_pos-1),(j_pos-1)] += aux_k[0,2]
