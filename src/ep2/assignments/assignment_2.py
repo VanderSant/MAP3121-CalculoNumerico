@@ -65,8 +65,10 @@ def read_input_c():
     return file_information
 
 def make_total_k_matrix(V):
-    k_matrix = np.zeros((28,28),dtype=float)
-    for i in range (0,len(V)):
+    n = 28
+    m = len(V)
+    k_matrix = np.zeros((n,n),dtype=float)
+    for i in range (0,m):
         aux_k = V[i].get_K()
         i_pos = int(2*(V[i].no1) - 1)
         j_pos = int(2*(V[i].no2) - 1)
@@ -86,7 +88,18 @@ def make_total_k_matrix(V):
         k_matrix[(j_pos),  (i_pos)]   += aux_k[3,1]
         k_matrix[(j_pos),  (j_pos-1)] += aux_k[3,2]
         k_matrix[(j_pos),  (j_pos)]   += aux_k[3,3]
+    for i in range(n-1,m-5,-1):
+        k_matrix = np.delete(k_matrix,i,0)
+        k_matrix = np.delete(k_matrix,i,1)
     return k_matrix
+
+def test_make_total_k_matrix(K):
+    fig = plt.figure()
+    ax = fig.add_subplot(1,1,1)
+    ax.set_aspect('equal')
+    plt.imshow(K)
+    plt.colorbar()
+    plt.show()
 
 def assignment_2():
     file_info = read_input_c()
@@ -96,14 +109,7 @@ def assignment_2():
         info = file_info[i]
         beams = np.append(beams,Beam(info[0],info[1],info[2],info[3]))
     K = make_total_k_matrix(beams)
-
-    fig = plt.figure()
-    ax = fig.add_subplot(1,1,1)
-    ax.set_aspect('equal')
-    plt.imshow(K)
-    plt.colorbar()
-    plt.show()
-    #print(K)
+    test_make_total_k_matrix(K)
 
 def test_class_beam():
     file_info = read_input_c()
