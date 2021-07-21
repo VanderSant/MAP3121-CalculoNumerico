@@ -131,7 +131,7 @@ def get_x_component(matrix,t,pos,type):
     return matrix_t
 
 def assignment_2():
-    np.set_printoptions(precision=6,threshold=5) #print options
+    np.set_printoptions(precision=3,threshold=5) #print options
     dt = 0.001
     time = 1
 
@@ -151,18 +151,22 @@ def assignment_2():
     z_vector = inv_sqrt_m@y_vector #get z
 
     f_vector = (w_vector)/(2*np.pi) #get frequencies
+    per_vector = 1/f_vector # get periods
+
     x_vector = lambda t: z_vector*np.cos(w_vector*t)
     x_vector_vertical = lambda t,pos: get_x_component(x_vector,t,pos,type = 0) #get vertical moviment (type = 0)
     x_vector_horizontal = lambda t,pos: get_x_component(x_vector,t,pos,type = 1) #get horizontal moviment (type = 1)
-    test_x_moviment(x_vector,x_vector_vertical,x_vector_horizontal)
+    #test_x_moviment(x_vector,x_vector_vertical,x_vector_horizontal)
 
     len_f = len(f_vector)
-    len_w = len(w_vector)
     print("menores frequencias = ", f_vector[len_f-5:len_f]) #print "menores frequencias"
-    print("menores frequencias angulares = ", w_vector[len_w-5:len_w]) #print "menores frequencias angulares"
+    print("modo de vibração = ", np.array([1,4,5,3,2])) #print "menores frequencias"
+    print("menores frequencias angulares = ", w_vector[len_f-5:len_f]) #print "menores frequencias angulares"
+    print("periodo das menores frequencias = ", per_vector[len_f-5:len_f]) #print "periodo das menores frequencias"
 
-    #t_points,x_points = get_points(dt,x_vector_vertical,23,time=time)
-    #plot_graphics(t_points,x_points,y_label = 'X')
+    t_points,x_points = get_points(dt,x_vector_horizontal,23,time=time)
+    #print("x_vector_horizontal =\n",x_points)
+    plot_graphics(t_points,x_points,y_label = 'X')
     #print_separado(t_points,x_points)
 
 
