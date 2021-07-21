@@ -52,10 +52,10 @@ def householder_algorithm(A,debug = False):
     return new_A
 
 def test_wi(A):
-    alfa = get_alfa(A)
+    alfa = get_alfa(A,1)
     wi = get_wi(A)
     y = alfa - (2*(np.inner(wi,alfa)/np.inner(wi,wi))*wi)
-    print(y)
+    print("wi =",y)
 
 def test_householder_algorithm():
     A = np.array([[2,-1,1,3],
@@ -64,9 +64,19 @@ def test_householder_algorithm():
                   [3,2,-1,1]], dtype=float)
     householder_algorithm(A,debug=True)
 
+def main():
+    print("Execução da função test_wi(A)")
+    A = np.array([[2,-1,1,3],
+                  [-1,1,4,2],
+                  [1,4,2,-1],
+                  [3,2,-1,1]], dtype=float)
+    test_wi(A)
+    print("\n Execução da função test_householder_algorithm()")
+    test_householder_algorithm()
+
 if __name__ == "__main__":
     try:
-        test_householder_algorithm()
+        main()
 
     except KeyboardInterrupt:
         print("\n Better luck next time")

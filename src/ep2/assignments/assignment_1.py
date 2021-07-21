@@ -37,6 +37,7 @@ def make_matrixB_alt(n):
         B[0:i,i] = n-i
         B[i,i] = n-i
     return B
+
 def get_eigenvalues(n):
     lamb = np.array([])
     eigenvaluesi = lambda i: ((1/2)*((1 - np.cos((2*i-1)*np.pi/(2*n+1)))**(-1)))
@@ -54,7 +55,7 @@ def assignment_1_a(debug = False):
     A = householder_algorithm(A)
     V,lamb = QR_algorithm(A)[0:2]
     print("autovetores =\n",V)
-    print("autovetores =\n",np.diagonal(lamb),"\n")
+    print("autovalores =\n",np.diagonal(lamb),"\n")
 
     if(debug == True):
         for i in range(0,len(A)):
@@ -62,6 +63,7 @@ def assignment_1_a(debug = False):
             print(A@V[:,i],"\n",np.diagonal(lamb)[i]*V[:,i],"\n")
 
 def assignment_1_b():
+    np.set_printoptions(precision=3,threshold=200,linewidth=1000) #print options
     n = 20
     B = make_matrixB(n)
     B = householder_algorithm(B)
@@ -69,7 +71,7 @@ def assignment_1_b():
     eigenvalues = get_eigenvalues(n)
 
     print("autovetores =\n",V)
-    print("autovetores =\n",np.diagonal(lamb))
+    print("autovalores =\n",np.diagonal(lamb))
     print("autovalores esperados =\n",eigenvalues)
 
 def assignment_1():
