@@ -44,7 +44,8 @@ def get_eigenvalues(n):
         lamb = np.append(lamb,eigenvaluesi(i))
     return lamb
 
-def assignment_1_a():
+def assignment_1_a(debug = False):
+    np.set_printoptions(precision=5,threshold=5) #print options
     A = np.array([[2., 4., 1., 1.],
                   [4., 2., 1., 1.],
                   [1., 1., 1., 2.],
@@ -52,8 +53,13 @@ def assignment_1_a():
 
     A = householder_algorithm(A)
     V,lamb = QR_algorithm(A)[0:2]
-    print("V =\n",V)
-    print("lamb =\n",np.diagonal(lamb))
+    print("autovetores =\n",V)
+    print("autovetores =\n",np.diagonal(lamb),"\n")
+
+    if(debug == True):
+        for i in range(0,len(A)):
+            print('teste {j}'.format(j=i))
+            print(A@V[:,i],"\n",np.diagonal(lamb)[i]*V[:,i],"\n")
 
 def assignment_1_b():
     n = 20
@@ -63,7 +69,7 @@ def assignment_1_b():
     eigenvalues = get_eigenvalues(n)
 
     print("autovetores =\n",V)
-    print("autovalores obtidos =\n",np.diagonal(lamb))
+    print("autovetores =\n",np.diagonal(lamb))
     print("autovalores esperados =\n",eigenvalues)
 
 def assignment_1():
