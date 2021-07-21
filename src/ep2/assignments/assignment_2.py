@@ -125,13 +125,10 @@ def inv_diagonal_matrix(matrix):
 def assignment_2():
     np.set_printoptions(precision=6,threshold=5) #print options
 
-    file_info = read_input_c() #read file
+    info = read_input_c() #read file and get the informations
     beams = np.array([])
 
-    #create beams objects
-    for i in range(0,NUM_TRE):
-        info = file_info[i]
-        beams = np.append(beams,Beam(info[0],info[1],info[2],info[3]))
+    beams = np.array([Beam(info[i][0],info[i][1],info[i][2],info[i][3]) for i in range(0,NUM_TRE)]) #create beams objects
 
     K = make_total_k_matrix(beams)
     M = make_M_matrix(beams)
@@ -158,11 +155,9 @@ def assignment_2():
     print("menores frequencias angulares = ", w_vector[len_w-5:len_w])
 
 def test_class_beam():
-    file_info = read_input_c()
-    beams = np.array([])
+    info = read_input_c()
+    beams = np.array([Beam(info[i][0],info[i][1],info[i][2],info[i][3]) for i in range(0,NUM_TRE)])
     for i in range(0,NUM_TRE):
-        info = file_info[i]
-        beams = np.append(beams,Beam(info[0],info[1],info[2],info[3]))
         print(beams[i]," massa =",beams[i].get_mass())
 
 def test_matrix_values(K):
