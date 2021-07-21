@@ -33,6 +33,7 @@ def get_wi(A):
 
 def householder_algorithm(A,debug = False):
     get_hwi_x = lambda w,x: (x - (2*(np.inner(w,x)/np.inner(w,w))*w))
+    A = A.copy()
     n = len(A)
     new_A = np.zeros((n,n))
     for i in range(0,n-2):

@@ -2,6 +2,7 @@
 #coding=utf-8
 
 from assignments.assignment_1 import assignment_1
+from assignments.assignment_2 import assignment_2
 
 EP_HEADER = '''
 ===============================================================================================
@@ -37,7 +38,7 @@ def main():
 
         elif ((assignment=="2") or (assignment=="4.2")):
             print_assignment_header("2")
-            #function two here
+            assignment_2()
 
         else:
             print("your input isn't valid \nplease, try again\n")

@@ -4,6 +4,9 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+from householder_method.householder_algorithm import householder_algorithm
+from QR_method.QR_algorithm import QR_algorithm
+
 A = 1/10 #m²
 E = 200*(10**(9)) #Pa
 NUM_TRE = 28
@@ -110,29 +113,45 @@ def make_M_matrix(V):
         m_matrix = np.delete(m_matrix,i,1)
     return m_matrix
 
-def inv_diagona_matrix(matrix):
+def inv_diagonal_matrix(matrix):
     diagonal = np.diagonal(matrix)
-    if ( len(np.where(diagonal == 0)[0]) == 0):
+    if (len(np.where(diagonal == 0)[0]) == 0):
         diagonal = 1/diagonal
         matrix_inv = np.diag(diagonal)
         return matrix_inv
     else:
-        print("erro inv_diagona_matrix")
+        print("erro inv_diagonal_matrix")
 
 def assignment_2():
-    np.set_printoptions(precision=2,suppress=True,threshold=24)
-    file_info = read_input_c()
+    np.set_printoptions(precision=2,suppress=True,threshold=5) #print options
+
+    file_info = read_input_c() #read file
     beams = np.array([])
+
+    #create beams objects
     for i in range(0,NUM_TRE):
         info = file_info[i]
         beams = np.append(beams,Beam(info[0],info[1],info[2],info[3]))
+
     K = make_total_k_matrix(beams)
     M = make_M_matrix(beams)
-    inv_m = inv_diagona_matrix(np.sqrt(M))
-    K_til = inv_m@K@inv_m
-    #print(K_til)
+    inv_sqrt_m = inv_diagonal_matrix(np.sqrt(M))
+    K_til = inv_sqrt_m@K@inv_sqrt_m
+    #print("K_til = \n",K_til,"\n")
+
+    build_diagonal_matrix = lambda matrix: QR_algorithm(householder_algorithm(matrix))
+    y_vector,w_vector,ite = build_diagonal_matrix(K_til)
+    w_vector = np.sqrt(w_vector)
+
+    z_vector = inv_sqrt_m@y_vector
+
+    #print("K_til = \n",K_til,"\n")
     #print("K = \n",np.matrix.round(K,4),"\n")
     #print("M = \n",np.matrix.round(M,4),"\n")
+    #print("inv(M) = \n",np.matrix.round(inv_sqrt_m,4),"\n")
+    print("y_vector = \n",y_vector,"\n")
+    print("w_vector = \n",w_vector,"\n")
+    print("z_vector = \n",z_vector,"\n")
 
 def test_class_beam():
     file_info = read_input_c()
@@ -142,7 +161,7 @@ def test_class_beam():
         beams = np.append(beams,Beam(info[0],info[1],info[2],info[3]))
         print(beams[i]," massa =",beams[i].get_mass())
 
-def test_make_total_k_matrix(K):
+def test_matrix_values(K):
     fig = plt.figure()
     ax = fig.add_subplot(1,1,1)
     ax.set_aspect('equal')

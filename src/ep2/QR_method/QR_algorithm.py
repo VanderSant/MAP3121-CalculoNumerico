@@ -38,6 +38,7 @@ def wilkinson_heuristics(A,n):
 
 def QR_algorithm(A, erro = 1/1000000, spectral_shift = True):
     #round_parameter = len(str(int(1/erro)))
+    A = A.copy()
     get_uk = lambda A,n,k,spectral_shift: wilkinson_heuristics(A,n)[0] if ((k > 0) and (spectral_shift == True)) else 0
     V = I = np.eye(len(A))
     k = 0
@@ -50,7 +51,7 @@ def QR_algorithm(A, erro = 1/1000000, spectral_shift = True):
             V = V@Q
             k = k + 1
             beta = wilkinson_heuristics(A,m)[1]
-        A = np.matrix.round(A,7) # A = np.matrix.round(A,round_parameter - 1)
+        A = np.matrix.round(A,6) # A = np.matrix.round(A,round_parameter - 1)
     lamb = A
     return [V,lamb,k]
 
