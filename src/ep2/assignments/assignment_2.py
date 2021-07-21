@@ -122,6 +122,9 @@ def inv_diagonal_matrix(matrix):
     else:
         print("erro inv_diagonal_matrix")
 
+def get_x_component(matrix,t,type):
+    return np.array([matrix(t)[i] for i in range(0+type,len(matrix(t)),2)])
+
 def assignment_2():
     np.set_printoptions(precision=6,threshold=5) #print options
 
@@ -130,29 +133,27 @@ def assignment_2():
 
     beams = np.array([Beam(info[i][0],info[i][1],info[i][2],info[i][3]) for i in range(0,NUM_TRE)]) #create beams objects
 
-    K = make_total_k_matrix(beams)
-    M = make_M_matrix(beams)
-    inv_sqrt_m = inv_diagonal_matrix(np.sqrt(M))
-    K_til = inv_sqrt_m@K@inv_sqrt_m
+    K = make_total_k_matrix(beams) #create K matrix
+    M = make_M_matrix(beams) #create M matrix
+    inv_sqrt_m = inv_diagonal_matrix(np.sqrt(M)) # invert M matrix
+    K_til = inv_sqrt_m@K@inv_sqrt_m #built Ktil
 
     build_diagonal_matrix = lambda matrix: QR_algorithm(householder_algorithm(matrix))
-    y_vector,w_vector,ite = build_diagonal_matrix(K_til)
+    y_vector,w_vector,ite = build_diagonal_matrix(K_til) #get y and w² with Ktil
 
-    w_vector = np.sqrt(np.diagonal(w_vector))
-    z_vector = inv_sqrt_m@y_vector
+    w_vector = np.sqrt(np.diagonal(w_vector)) #get w
+    z_vector = inv_sqrt_m@y_vector #get z
 
-    f_vector = (w_vector)/(2*np.pi)
+    f_vector = (w_vector)/(2*np.pi) #get frequencies
     x_vector = lambda t: z_vector*np.cos(w_vector*t)
+    x_vector_vertical = lambda t: get_x_component(x_vector,t,0) #get vertical moviment
+    x_vector_horizontal = lambda t: get_x_component(x_vector,t,1) #get horizontal moviment
+    test_x_moviment(x_vector,x_vector_vertical,x_vector_horizontal)
 
-    #print("y_vector = \n",y_vector,"\n")
-    #print("f_vector = \n",f_vector,"\n")
-    #print("z_vector = \n",z_vector,"\n")
-    #print("x_vector(0) = \n",x_vector(0),"\n")
-    #test_matrix_values(np.diag(f_vector))
     len_f = len(f_vector)
     len_w = len(w_vector)
-    print("menores frequencias = ", f_vector[len_f-5:len_f])
-    print("menores frequencias angulares = ", w_vector[len_w-5:len_w])
+    print("menores frequencias = ", f_vector[len_f-5:len_f]) #print "menores frequencias"
+    print("menores frequencias angulares = ", w_vector[len_w-5:len_w]) #print "menores frequencias angulares"
 
 def test_class_beam():
     info = read_input_c()
@@ -167,6 +168,13 @@ def test_matrix_values(K):
     plt.imshow(K)
     plt.colorbar()
     plt.show()
+
+def test_x_moviment(x_vector,x_vector_vertical,x_vector_horizontal):
+    print("x_vector(0) = \n",x_vector(0),"\n")
+    print("x_vector_vertical(0) = \n",x_vector_vertical(0),"\n")
+    print("x_vector_horizontal(0) = \n",x_vector_horizontal(0),"\n")
+    print("x_vector_horizontal(0) = \n",x_vector_horizontal(0)[0:12,23],"\n")
+
 
 if __name__ == "__main__":
     try:
