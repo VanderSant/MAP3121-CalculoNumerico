@@ -3,9 +3,23 @@
 
 import numpy as np
 import matplotlib.pyplot as plt
+color_array = np.array(["blue","green","red","cyan","magenta","yellow","black","blue","green","red","cyan","magenta","yellow","black"])
+
+def plot_all_together(t_array,x_array):
+    quantity_graphics = len(x_array)
+
+    plt.xlim(min(t_array), max(t_array))
+    #plt.ylim(min(x_array[i]), max(x_array[i]))
+    for i in range(0,quantity_graphics,1):
+        plt.plot(t_array,x_array[i],label='nó {a}'.format(a=i+1),color=color_array[i])
+    plt.ylabel('x(t)')
+    plt.xlabel('time(s)')
+
+    plt.legend(loc='upper center', bbox_to_anchor=(0.5, 1.15), ncol=2, frameon=False)
+    plt.show()
+    pass
 
 def plot_graphics(t_array,y_array,y_label = 'frequency',x_label = 'time',label = "x"):
-    color_array = np.array(["blue","green","red","cyan","magenta","yellow","black","blue","green","red","cyan","magenta","yellow","black"])
     quantity_graphics = len(y_array)
     fig, axs = plt.subplots(quantity_graphics)
     for i in range(0,quantity_graphics,1):
@@ -16,13 +30,12 @@ def plot_graphics(t_array,y_array,y_label = 'frequency',x_label = 'time',label =
     plt.show()
 
 def print_separado(t_array,x_array):
-    color_array = np.array(["blue","green","red","cyan","magenta","yellow","black","blue","green","red","cyan","magenta","yellow","black"])
     quantity_graphics = len(x_array)
     for i in range(0,quantity_graphics,1):
         plt.xlim(min(t_array), max(t_array))
         plt.ylim(min(x_array[i]), max(x_array[i]))
 
-        plt.plot(t_array,x_array[i],label='massa {a}'.format(a=i+1),color=color_array[i])
+        plt.plot(t_array,x_array[i],label='nó {a}'.format(a=i+1),color=color_array[i])
         plt.ylabel('x(t)')
         plt.xlabel('time(s)')
 

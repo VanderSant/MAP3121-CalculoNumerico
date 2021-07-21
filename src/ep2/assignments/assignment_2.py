@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 
 from householder_method.householder_algorithm import householder_algorithm
 from QR_method.QR_algorithm import QR_algorithm
-from plot_libs.plot_functions import get_points,plot_graphics,print_separado,test_matrix_values
+from plot_libs.plot_functions import get_points,plot_graphics,print_separado,test_matrix_values,plot_all_together
 
 A = 1/10 #m²
 E = 200*(10**(9)) #Pa
@@ -132,7 +132,7 @@ def get_x_component(matrix,t,pos,type):
 
 def assignment_2():
     np.set_printoptions(precision=3,threshold=5) #print options
-    dt = 0.001
+    dt = 0.0001
     time = 1
 
     info = read_input_c() #read file and get the informations
@@ -167,6 +167,7 @@ def assignment_2():
     t_points,x_points = get_points(dt,x_vector_horizontal,23,time=time)
     #print("x_vector_horizontal =\n",x_points)
     plot_graphics(t_points,x_points,y_label = 'X')
+    plot_all_together(t_points,x_points)
     #print_separado(t_points,x_points)
 
 
