@@ -110,6 +110,15 @@ def make_M_matrix(V):
         m_matrix = np.delete(m_matrix,i,1)
     return m_matrix
 
+def inv_diagona_matrix(matrix):
+    diagonal = np.diagonal(matrix)
+    if ( len(np.where(diagonal == 0)[0]) == 0):
+        diagonal = 1/diagonal
+        matrix_inv = np.diag(diagonal)
+        return matrix_inv
+    else:
+        print("erro inv_diagona_matrix")
+
 def assignment_2():
     np.set_printoptions(precision=2,suppress=True,threshold=24)
     file_info = read_input_c()
@@ -119,7 +128,8 @@ def assignment_2():
         beams = np.append(beams,Beam(info[0],info[1],info[2],info[3]))
     K = make_total_k_matrix(beams)
     M = make_M_matrix(beams)
-    K_til = (np.linalg.inv(np.sqrt(M)))@K@(np.linalg.inv(np.sqrt(M)))
+    inv_m = inv_diagona_matrix(np.sqrt(M))
+    K_til = inv_m@K@inv_m
     #print(K_til)
     #print("K = \n",np.matrix.round(K,4),"\n")
     #print("M = \n",np.matrix.round(M,4),"\n")
