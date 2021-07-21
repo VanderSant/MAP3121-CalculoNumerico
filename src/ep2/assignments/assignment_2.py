@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 
 from householder_method.householder_algorithm import householder_algorithm
 from QR_method.QR_algorithm import QR_algorithm
+from plot_libs.plot_functions import get_points,plot_graphics,print_separado,test_matrix_values
 
 A = 1/10 #m²
 E = 200*(10**(9)) #Pa
@@ -122,14 +123,19 @@ def inv_diagonal_matrix(matrix):
     else:
         print("erro inv_diagonal_matrix")
 
-def get_x_component(matrix,t,type):
-    return np.array([matrix(t)[i] for i in range(0+type,len(matrix(t)),2)])
+def get_x_component(matrix,t,pos,type):
+    x0 = matrix(0)[0:12,pos]
+    matrix_t = np.zeros(shape = [len(x0),1], dtype = float)
+    for i in range(0,len(x0)):
+        matrix_t[i] = matrix(t)[(2*i)+type,pos]
+    return matrix_t
 
 def assignment_2():
     np.set_printoptions(precision=6,threshold=5) #print options
+    dt = 0.001
+    time = 1
 
     info = read_input_c() #read file and get the informations
-    beams = np.array([])
 
     beams = np.array([Beam(info[i][0],info[i][1],info[i][2],info[i][3]) for i in range(0,NUM_TRE)]) #create beams objects
 
@@ -146,8 +152,8 @@ def assignment_2():
 
     f_vector = (w_vector)/(2*np.pi) #get frequencies
     x_vector = lambda t: z_vector*np.cos(w_vector*t)
-    x_vector_vertical = lambda t: get_x_component(x_vector,t,0) #get vertical moviment
-    x_vector_horizontal = lambda t: get_x_component(x_vector,t,1) #get horizontal moviment
+    x_vector_vertical = lambda t,pos: get_x_component(x_vector,t,pos,type = 0) #get vertical moviment (type = 0)
+    x_vector_horizontal = lambda t,pos: get_x_component(x_vector,t,pos,type = 1) #get horizontal moviment (type = 1)
     test_x_moviment(x_vector,x_vector_vertical,x_vector_horizontal)
 
     len_f = len(f_vector)
@@ -155,25 +161,21 @@ def assignment_2():
     print("menores frequencias = ", f_vector[len_f-5:len_f]) #print "menores frequencias"
     print("menores frequencias angulares = ", w_vector[len_w-5:len_w]) #print "menores frequencias angulares"
 
+    #t_points,x_points = get_points(dt,x_vector_vertical,23,time=time)
+    #plot_graphics(t_points,x_points,y_label = 'X')
+    #print_separado(t_points,x_points)
+
+
 def test_class_beam():
     info = read_input_c()
     beams = np.array([Beam(info[i][0],info[i][1],info[i][2],info[i][3]) for i in range(0,NUM_TRE)])
     for i in range(0,NUM_TRE):
         print(beams[i]," massa =",beams[i].get_mass())
 
-def test_matrix_values(K):
-    fig = plt.figure()
-    ax = fig.add_subplot(1,1,1)
-    ax.set_aspect('equal')
-    plt.imshow(K)
-    plt.colorbar()
-    plt.show()
-
 def test_x_moviment(x_vector,x_vector_vertical,x_vector_horizontal):
     print("x_vector(0) = \n",x_vector(0),"\n")
-    print("x_vector_vertical(0) = \n",x_vector_vertical(0),"\n")
-    print("x_vector_horizontal(0) = \n",x_vector_horizontal(0),"\n")
-    print("x_vector_horizontal(0) = \n",x_vector_horizontal(0)[0:12,23],"\n")
+    print("x_vector_vertical(0) = \n",x_vector_vertical(0,23),"\n")
+    print("x_vector_horizontal(0) = \n",x_vector_horizontal(0,23),"\n")
 
 
 if __name__ == "__main__":
