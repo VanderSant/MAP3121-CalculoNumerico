@@ -123,7 +123,7 @@ def inv_diagonal_matrix(matrix):
         print("erro inv_diagonal_matrix")
 
 def assignment_2():
-    np.set_printoptions(precision=2,suppress=True,threshold=5) #print options
+    np.set_printoptions(precision=6,threshold=5) #print options
 
     file_info = read_input_c() #read file
     beams = np.array([])
@@ -137,21 +137,25 @@ def assignment_2():
     M = make_M_matrix(beams)
     inv_sqrt_m = inv_diagonal_matrix(np.sqrt(M))
     K_til = inv_sqrt_m@K@inv_sqrt_m
-    #print("K_til = \n",K_til,"\n")
 
     build_diagonal_matrix = lambda matrix: QR_algorithm(householder_algorithm(matrix))
     y_vector,w_vector,ite = build_diagonal_matrix(K_til)
-    w_vector = np.sqrt(w_vector)
 
+    w_vector = np.sqrt(np.diagonal(w_vector))
     z_vector = inv_sqrt_m@y_vector
 
-    #print("K_til = \n",K_til,"\n")
-    #print("K = \n",np.matrix.round(K,4),"\n")
-    #print("M = \n",np.matrix.round(M,4),"\n")
-    #print("inv(M) = \n",np.matrix.round(inv_sqrt_m,4),"\n")
-    print("y_vector = \n",y_vector,"\n")
-    print("w_vector = \n",w_vector,"\n")
-    print("z_vector = \n",z_vector,"\n")
+    f_vector = (w_vector)/(2*np.pi)
+    x_vector = lambda t: z_vector*np.cos(w_vector*t)
+
+    #print("y_vector = \n",y_vector,"\n")
+    #print("f_vector = \n",f_vector,"\n")
+    #print("z_vector = \n",z_vector,"\n")
+    #print("x_vector(0) = \n",x_vector(0),"\n")
+    #test_matrix_values(np.diag(f_vector))
+    len_f = len(f_vector)
+    len_w = len(w_vector)
+    print("menores frequencias = ", f_vector[len_f-5:len_f])
+    print("menores frequencias angulares = ", w_vector[len_w-5:len_w])
 
 def test_class_beam():
     file_info = read_input_c()
