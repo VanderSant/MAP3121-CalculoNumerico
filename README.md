@@ -52,27 +52,22 @@ Ao executar o arquivo, será questionado qual tarefa deseja-se executar, com iss
 
 Na tarefa 1, temos opção de observar o item 1.a ou 1.b, com isso, digite:
 
-  a - Tarefa 4.1.a: Calculo dos auto valores e autovetores da matriz:
-$$
-\left(\begin{array}{cc} 
-2 & 4 & 1 & 1\\
-4 & 2 & 1 & 1\\
-1 & 1 & 1 & 2\\
-1 & 1 & 2 & 1\\
-\end{array}\right)
-$$
+  a - Tarefa 4.1.a: Calculo dos auto valores e autovetores da matriz: 
 
+```python
+    [2., 4., 1., 1.]
+    [4., 2., 1., 1.]
+    [1., 1., 1., 2.]
+    [1., 1., 2., 1.]
+```
 
 b - Tarefa 4.1.b: Calculo dos auto valores e autovetores da matriz:
 
-$$
-\left(\begin{array}{cc}
-    n & n-1 & n-2 & \dots  & 2 & 1\\
-    n-1 & n-1 & n-2 & \dots  & 2 & 1 \\
-    \vdots & \vdots & \vdots & \ddots & \vdots \\
-    2 & 2 & 2 & \dots  & 2 & 1 \\
-    1 & 1 & 1 & \dots  & 1 & 1
-\end{array}\right)
-$$
-
-
+```python
+    [ n  n-1 n-2 ...  2   1 ]
+    [n-1 n-1 n-2 ...  2   1 ]
+    [n-2 n-2 n-2 ...  2   1 ]
+    [ :   :   :  ...  :   : ]
+    [ 2   2   2   2   2   1 ]
+    [ 1   1   1   1   1   1 ]
+```
