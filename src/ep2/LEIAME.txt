@@ -1,0 +1,21 @@
+# EP2 - Autovalores e Autovetores de Matrizes Reais Simétricas - O Algoritmo QR
+
+## Execução:
+Para executar o Exercício Programa 2, vá para o diretório  onde se encontra o arquivo "main.py" e o execute-o com o comando "python main.py".
+
+Ao executar o arquivo, será questionado qual tarefa deseja-se executar, com isso, digite:
+
+1- Caso deseje visualizar a execução da tarefa 1 - Testes
+
+12- Caso deseje visualizar a execução da tarefa 2 - Aplicação: Treliças Planas
+
+## Estrutura dos arquivos
+
+__QR_algorithm.py__             - Declaração das funções referente a execução ao algoritmo QR
+__householder_algorithm.py__    - Declaração das funções referentes a execução das transformações de Householder
+__assignment_1.py__             - Declaração das funções necessárias a execução da tarefa 1
+__assignment_2.py__             - Declaração das funções necessárias a execução da tarefa 2
+__main.py__                     - Função principal a qual executa o EP
+__plot_functions.py__           - Biblioteca utilizada para construção de gráficos
+
+ input-a/b/c                    - Dados fornecidos pela disciplina necessários a execução do EP
