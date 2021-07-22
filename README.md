@@ -23,7 +23,7 @@ pip install -r .\requirements.txt
 
 Para executar o Exercício Programa 1, vá para o diretório  onde se encontra o arquivo "main.py" e o execute-o com o comando "python main.py".
 ```bash
-python .\main.py
+python .\src\ep1\main.py
 ```
 
 Ao interpretar o arquivo, será perguntado no terminal qual entre as tarefas se deseja visualizar a execução, sendo necessário o usuário indicar, devendo inserir:
@@ -55,10 +55,10 @@ Na tarefa 1, temos opção de observar o item 1.a ou 1.b, com isso, digite:
   a - Tarefa 4.1.a: Calculo dos auto valores e autovetores da matriz: 
 
 ```python
-    [2., 4., 1., 1.]
-    [4., 2., 1., 1.]
-    [1., 1., 1., 2.]
-    [1., 1., 2., 1.]
+    [2, 4, 1, 1]
+    [4, 2, 1, 1]
+    [1, 1, 1, 2]
+    [1, 1, 2, 1]
 ```
 
 b - Tarefa 4.1.b: Calculo dos auto valores e autovetores da matriz:
