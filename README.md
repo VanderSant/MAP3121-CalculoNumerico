@@ -38,7 +38,41 @@ Para sair da execução do arquivo aperte as teclas "Ctrl"+"c"
 
 ## 💥 Execução do EP2
 
+Para executar o Exercício Programa 2 use o comando abaixo:
 
-### Coming Soon ...
+```bash
+python .\src\ep2\main.py
+```
+
+Ao executar o arquivo, será questionado qual tarefa deseja-se executar, com isso, digite:
+
+  1 - Caso deseje visualizar a execução da tarefa 1 - Testes
+
+  2 - Caso deseje visualizar a execução da tarefa 2 - Aplicação: Treliças Planas
+
+Na tarefa 1, temos opção de observar o item 1.a ou 1.b, com isso, digite:
+
+  a - Tarefa 4.1.a: Calculo dos auto valores e autovetores da matriz:
+$$
+\left(\begin{array}{cc} 
+2 & 4 & 1 & 1\\
+4 & 2 & 1 & 1\\
+1 & 1 & 1 & 2\\
+1 & 1 & 2 & 1\\
+\end{array}\right)
+$$
+
+
+b - Tarefa 4.1.b: Calculo dos auto valores e autovetores da matriz:
+
+$$
+\left(\begin{array}{cc}
+    n & n-1 & n-2 & \dots  & 2 & 1\\
+    n-1 & n-1 & n-2 & \dots  & 2 & 1 \\
+    \vdots & \vdots & \vdots & \ddots & \vdots \\
+    2 & 2 & 2 & \dots  & 2 & 1 \\
+    1 & 1 & 1 & \dots  & 1 & 1
+\end{array}\right)
+$$
 
 
