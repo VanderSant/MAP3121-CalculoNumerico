@@ -15,6 +15,11 @@ DENSIDADE = 7.8*(10**(3)) #kg/m³
 
 PATH = "src/ep2/inputs/input-c"
 
+INFO = '''
+TAREFA 4.2:
+Treliças Planas
+'''
+
 class Beam:
     def __init__(self,no1,no2,ang,lenght):
         self.no1 = no1
@@ -130,8 +135,9 @@ def get_x_component(matrix,t,pos,type):
         matrix_t[i] = matrix(t)[(2*i)+type,pos]
     return matrix_t
 
-def assignment_2():
-    np.set_printoptions(precision=3,threshold=5) #print options
+def assignment_2(debug = False):
+    print(INFO,"\n")
+    np.set_printoptions(precision=3,threshold=10,linewidth=1000) #print options
     dt = 0.0001
     time = 1
 
@@ -156,20 +162,21 @@ def assignment_2():
     x_vector = lambda t: z_vector*np.cos(w_vector*t)
     x_vector_vertical = lambda t,pos: get_x_component(x_vector,t,pos,type = 0) #get vertical moviment (type = 0)
     x_vector_horizontal = lambda t,pos: get_x_component(x_vector,t,pos,type = 1) #get horizontal moviment (type = 1)
-    #test_x_moviment(x_vector,x_vector_vertical,x_vector_horizontal)
 
     len_f = len(f_vector)
-    print("menores frequencias = ", f_vector[len_f-5:len_f]) #print "menores frequencias"
-    print("modo de vibração = ", np.array([1,4,5,3,2])) #print "menores frequencias"
-    print("menores frequencias angulares = ", w_vector[len_f-5:len_f]) #print "menores frequencias angulares"
-    print("periodo das menores frequencias = ", per_vector[len_f-5:len_f]) #print "periodo das menores frequencias"
+    print("menores frequencias = \n",f_vector[len_f-5:len_f]) #print "menores frequencias"
+    print("menores frequencias angulares = \n", w_vector[len_f-5:len_f]) #print "menores frequencias angulares"
+    print("modo de vibração = \n", z_vector[:,23-5:23]) #print "menores frequencias"
 
-    t_points,x_points = get_points(dt,x_vector_horizontal,23,time=time)
-    #print("x_vector_horizontal =\n",x_points)
-    plot_graphics(t_points,x_points,y_label = 'X')
-    plot_all_together(t_points,x_points)
-    #print_separado(t_points,x_points)
+    if(debug == True):
+        print("K =\n",K,"\n")
+        print("M =\n",M,"\n")
+        print("K_til =\n",K_til,"\n")
+        print("periodo das menores frequencias = ", per_vector[len_f-5:len_f]) #print "periodo das menores frequencias"
 
+        t_points,x_points = get_points(dt,x_vector_horizontal,23,time=time)
+        plot_graphics(t_points,x_points,y_label = 'X')
+        plot_all_together(t_points,x_points)
 
 def test_class_beam():
     info = read_input_c()
